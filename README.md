@@ -1,8 +1,8 @@
 Defines a function from CSV files and class definitions
 
-The CSV files are conceptually split into two halves; domain columns and range columns, corresponding to fields of the domain and range dataclasses. At the moment they're not easily distinguished by name, that would be a good first improvement.
+The CSV files are conceptually split into two halves; domain columns and range columns, corresponding to fields of the domain and range dataclasses. At the moment they're not easily distinguished by name, enabling e.g. ClassName_\* prefixes would be a good first improvement.
 
-The mapping specified by the CSV is defined by taking input data as a domain row, getting all domain rows in the CSV that match it, and returning the intersection of the corresponding range rows. Wildcards (\*) match any piece of data on the domain side, and when intersecting range rows, are overridden by any actual data.
+The mapping specified by the CSV is defined by taking input data as a domain row, getting all domain rows in the CSV that match it, and returning the intersection of the corresponding range rows. Wildcards (\*) match any piece of data (in their column) on the domain side, and when intersecting range rows, are overridden by any actual data.
 
 ## Idea
 
@@ -22,7 +22,7 @@ yogi,*,*,celadon
 *,trout,0,*
 ```
 
-first select all rows where the domain part (under `name`,`species`) matches our input 
+First select all rows where the domain part (under `name`,`species`) matches our input 
 
 ``` csv
 *,bear,4,*
@@ -52,7 +52,7 @@ name,species,legs,hat colour
 yogi,bear,2,celadon
 ```
 
-the conflict between yogi bear having two legs, and bears in general having four, will be detected before even specifying an input to be mapped. Perhaps an improvement could be some intuitive precedence behaviour (Yogi is more specific than bear, so takes precedence), but for now any such cases are just flagged and prevent using the CSV.
+The conflict between yogi bear having two legs, and bears in general having four, will be detected before even specifying an input to be mapped. Perhaps an improvement could be some intuitive precedence behaviour (yogi bear is more specific than bear, so takes precedence), but for now any such cases are just flagged and prevent using the CSV.
 
 ## Usage
 
