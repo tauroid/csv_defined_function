@@ -63,20 +63,19 @@ from pathlib import Path
 
 from itertools import chain
 
+ice_cream_loader = CSVDeserialiser(tuple[IceCream,Product])
 # Different parts of the mapping can be specified in different files
-flavours = CSVDeserialiser(tuple[IceCream,Product]).load(Path("./flavours.csv"))
-zip_codes = CSVDeserialiser(tuple[IceCream,Product]).load(Path("./zip_codes.csv"))
+flavours = ice_cream_loader.load(Path("./flavours.csv"))
+zip_codes = ice_cream_loader.load(Path("./zip_codes.csv"))
 
 ice_cream_to_product = to_function(chain(flavours, zip_codes))
 
 ice_cream_to_product(IceCream(IceCreamName("a","b"), "ants", 1234))
 # Product(product_id=*, company='jelly time', jurisdiction_id=4321, reviews='bad')
 
-conflicting_reviews = CSVDeserialiser(tuple[IceCream,Product]).load(Path("./conflicting_reviews.csv"))
+conflicting_reviews = ice_cream_loader.load(Path("./conflicting_reviews.csv"))
 
 to_function(conflicting_reviews)
 # AssertionError: IceCream(full_name=IceCreamName(brand_name=*, edition=*), flavour='vanilla', zip_code=*) and IceCream(full_name=IceCreamName(brand_name='tots', edition=*), flavour='vanilla', zip_code=*) are compatible (overlap) but their respective mappings Product(product_id=*, company=*, jurisdiction_id=*, reviews='good') and Product(product_id=*, company=*, jurisdiction_id=*, reviews='bad') conflict
 # I did say the error message could be improved...
 ```
-
-`
