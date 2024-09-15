@@ -8,51 +8,48 @@ The mapping specified by the CSV is defined by taking input data as a domain row
 
 Example; we want to map the following domain concept
 
-``` csv
-name,species
-yogi,bear
-```
+| name | species |
+|-|-|
+| yogi | bear |
 
 using the mapping
 
-``` csv
-name,species,legs,hat colour
-*,bear,4,*
-yogi,*,*,celadon
-*,trout,0,*
-```
+| name | species | legs | hat colour |
+|-|-|-|-|
+| * | bear | 4 | * |
+| yogi | * | * | celadon |
+| * | trout | 0 | * |
 
 First select all rows where the domain part (under `name`,`species`) matches our input 
 
-``` csv
-*,bear,4,*
-yogi,*,*,celadon
-```
+| name | species | legs | hat colour |
+|-|-|-|-|
+| * | bear | 4 | * |
+| yogi | * | * | celadon |
 
 collect the corresponding range entries
 
-``` csv
-4,*
-*,celadon
-```
+| legs | hat colour |
+|-|-|
+| 4 | * |
+| * | celadon |
 
 and intersect them
 
-``` csv
-4,celadon
-```
+| legs | hat colour |
+|-|-|
+| 4 | celadon |
 
 ### Invalid mapping
 
 It's possible with CSVs to specify a _relation_ that is not a _function_. The code in this repo detects this (the error message has room for improvement). E.g. when defining a function from the "mapping"
 
-``` csv
-name,species,legs,hat colour
-*,bear,4,*
-yogi,bear,2,celadon
-```
+| name | species | legs | hat colour |
+|-|-|-|-|
+| * | bear | 4 | * |
+| yogi | bear | 2 | celadon |
 
-The conflict between yogi bear having two legs, and bears in general having four, will be detected before even specifying an input to be mapped. Perhaps an improvement could be some intuitive precedence behaviour (yogi bear is more specific than bear, so takes precedence), but for now any such cases are just flagged and prevent using the CSV.
+The conflict between yogi bear having two legs, and bears in general having four, will be detected before even specifying an input to be mapped. Perhaps an improvement could be some intuitive precedence behaviour (yogi bear is more specific than bear, so takes precedence), but for now any such cases are just flagged and prevent function creation.
 
 ## Usage
 
