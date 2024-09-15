@@ -61,6 +61,7 @@ from pathlib import Path
 from itertools import chain
 
 ice_cream_loader = CSVDeserialiser(tuple[IceCream,Product])
+
 # Different parts of the mapping can be specified in different files
 flavours = ice_cream_loader.load(Path("./flavours.csv"))
 zip_codes = ice_cream_loader.load(Path("./zip_codes.csv"))
