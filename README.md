@@ -47,7 +47,7 @@ It's possible with CSVs to specify a _relation_ that is not a _function_. The co
 | name | species | legs | hat colour |
 |-|-|-|-|
 | * | bear | 4 | * |
-| yogi | bear | 2 | celadon |
+| yogi | * | 2 | celadon |
 
 The conflict between yogi bear having two legs, and bears in general having four, will be detected before even specifying an input to be mapped. Perhaps an improvement could be some intuitive precedence behaviour (yogi bear is more specific than bear, so takes precedence), but for now any such cases are just flagged and prevent function creation.
 
