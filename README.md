@@ -14,18 +14,18 @@ Example; we want to map the following domain concept
 
 using the mapping
 
-| name | species | legs | hat colour |
-|-|-|-|-|
-| * | bear | 4 | * |
-| yogi | * | * | celadon |
-| * | trout | 0 | * |
+| name | species | | legs | hat colour |
+|-|-|-|-|-|
+| * | bear | | 4 | * |
+| yogi | * | | * | celadon |
+| * | trout | | 0 | * |
 
 First select all rows where the domain part (under `name`,`species`) matches our input 
 
-| name | species | legs | hat colour |
-|-|-|-|-|
-| * | bear | 4 | * |
-| yogi | * | * | celadon |
+| name | species | | legs | hat colour |
+|-|-|-|-|-|
+| * | bear | | 4 | * |
+| yogi | * | | * | celadon |
 
 collect the corresponding range entries
 
